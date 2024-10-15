@@ -42,4 +42,18 @@ export class ProjectService {
       data: { deleted: true },
     });
   }
+
+  async updateExpiredProjects(): Promise<void> {
+    const currentDate = new Date();
+    await this.prismaService.project.updateMany({
+      where: {
+        expiredAt: { lt: currentDate },
+        status: { not: 'expired' },
+      },
+      data: {
+        status: 'expired',
+      },
+    });
+  }
+
 }

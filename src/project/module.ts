@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ProjectService } from './service/project.service';
 import { PrismaService } from '../lib/prisma';
 import { ConfigModule } from '@nestjs/config';
+import { ProjectScheduler } from './scheduler/project.scheduler';
 @Module({
   imports: [
     ConfigModule.forRoot(), 
@@ -15,6 +16,6 @@ import { ConfigModule } from '@nestjs/config';
     }),
   ],
   controllers: [ProjectController],
-  providers: [ProjectService, PrismaService],
+  providers: [ProjectService, ProjectScheduler, PrismaService],
 })
 export class ProjectModule {}
